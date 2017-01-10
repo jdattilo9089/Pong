@@ -37,7 +37,7 @@ class GameScene: SKScene {
         ball.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         
         if playerWhoWon == player {
-//            score[0] += 1
+//          score[0] += 1
             
             ball.physicsBody?.applyImpulse(CGVector(dx: 190, dy: 190))
             }
