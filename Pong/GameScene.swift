@@ -14,6 +14,7 @@ class GameScene: SKScene {
     var ball = SKSpriteNode()
     var player = SKSpriteNode()
     var computer = SKSpriteNode()
+    var timer = Timer()
     
     override func didMove(to view: SKView) {
         ball = self.childNode(withName: "ball") as! SKSpriteNode
@@ -31,24 +32,28 @@ class GameScene: SKScene {
         
        
     }
+    
+    
     func addScore(playerWhoWon : SKSpriteNode){
         
         ball.position = CGPoint(x: 0, y: 0)
         ball.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-        
-        if playerWhoWon == player {
+//        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: "countUp", userInfo: nil, repeats: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        if playerWhoWon == self.player {
 //          score[0] += 1
             
-            ball.physicsBody?.applyImpulse(CGVector(dx: 190, dy: 190))
+            self.ball.physicsBody?.applyImpulse(CGVector(dx: 190, dy: 190))
             }
-        else if playerWhoWon == computer {
+        else if playerWhoWon == self.computer {
 //            score[1] += 1
-            ball.physicsBody?.applyImpulse(CGVector(dx: -190, dy: -190))
+            self.ball.physicsBody?.applyImpulse(CGVector(dx: -190, dy: -190))
         }
         
 //        topLbl.text = "\(score[1])"
 //        btmLbl.text = "\(score[0])"
-    }
+        }
+}
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches{
             let location = touch.location(in: self)
@@ -66,7 +71,7 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
-        computer.run(SKAction.moveTo(x: ball.position.x, duration: 0.7))
+        computer.run(SKAction.moveTo(x: ball.position.x, duration: 0.2))
        
         if ball.position.y <= player.position.y - 30 {
             addScore(playerWhoWon: computer)
@@ -75,5 +80,5 @@ class GameScene: SKScene {
             addScore(playerWhoWon: player)
         }
     }
-}
 
+}
