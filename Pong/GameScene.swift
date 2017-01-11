@@ -38,7 +38,6 @@ class GameScene: SKScene {
         
         ball.position = CGPoint(x: 0, y: 0)
         ball.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-//        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: "countUp", userInfo: nil, repeats: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         if playerWhoWon == self.player {
 //          score[0] += 1
