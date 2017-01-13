@@ -26,7 +26,7 @@ class GameScene: SKScene {
         
         let border = SKPhysicsBody(edgeLoopFrom: self.frame)
         border.friction = 0
-        border.restitution = 1.2
+        border.restitution = 1.05
         self.physicsBody = border
         
         player = self.childNode(withName: "Player") as! SKSpriteNode
